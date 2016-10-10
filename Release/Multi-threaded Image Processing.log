@@ -1,8 +1,8 @@
 ﻿  Multi-threaded Image Processing.cpp
-Multi-threaded Image Processing.cpp(201): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+Multi-threaded Image Processing.cpp(163): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Generating code
-  106 of 355 functions (29.9%) were compiled, the rest were copied from previous compilation.
-    58 functions were new in current compilation
-    38 functions had inline decision re-evaluated but remain unchanged
+  4 of 1507 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    3 functions were new in current compilation
+    22 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Multi-threaded Image Processing.vcxproj -> C:\Users\user\Desktop\677\Multi-threaded Image Processing\Release\Multi-threaded Image Processing.exe

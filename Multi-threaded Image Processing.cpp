@@ -15,7 +15,8 @@
 #include <cmath>
 #include <ctime>
 #include <omp.h>
-#include<stdio.h>
+#include <stdio.h>
+#include <thread>
 
 
 using namespace std;
@@ -47,8 +48,6 @@ typedef struct {
 //sobel algorithm declaration
 vector <vector <int>> sobel(int width, int height, vector <vector <int> >, vector <vector <int> >);
 
-//split images declaration
-vector <vector <int>> split(int height, int width, int split);
 
 int main(int argc, char* argv[])
 {
@@ -98,10 +97,6 @@ int main(int argc, char* argv[])
 	}
 	cout << imageFileName << ": " << information.width << " x " << information.height << endl;
 
-	//split image into equal parts
-
-
-
 	// this loop shows how to simply recreate the original Black-and-White image
 	for (row = 0; row < information.height; row++) {
 		newData.push_back(vector <int>());
@@ -109,9 +104,27 @@ int main(int argc, char* argv[])
 			newData[row].push_back(data[row][col]);
 		}
 	}
+	//divide 2d matrix for threading
+	int total_rows = information.height;
+	int rows = double(total_rows % 4);
+	int rows_per_thread = floor(total_rows / 4);
+	//Calculate start and stop rows for threads
+	int row_t1_max = rows_per_thread;
+	int row_t2_max = rows_per_thread * 2;
+	int row_t3 = rows_per_thread * 3;
+	int row_t4 = rows_per_thread * 4 + rows;
+
+
+	//create thread
+	thread t1(sobel, information.width, information.height, newData, data);
+	thread t2(sobel, information.width, information.height, newData, data);
+	thread t3(sobel, information.width, information.height, newData, data);
+	thread t4(sobel, information.width, information.height, newData, data);
+
+	//t1.join;
 
 	//call sobel function and store matrix data into variable newData
-	newData = sobel(information.width, information.height, newData, data);
+	//newData = sobel(information.width, information.height, newData, data);
 
 	// write header to new image file
 	newImageFile.write((char *)&header, sizeof(header_type));
@@ -172,19 +185,3 @@ vector <vector <int> > sobel(int width, int height, vector <vector <int> > newIm
 	return newImageData;
 }
 
-vector <vector <int>> split(int height, int width, int split) {
-
-	vector <vector <int >> chunks;
-	int modulous_y = height % split;
-	int modulous_x = width % split;
-	
-	int width = width / 4;
-	int height = height / 4;
-
-	
-
-
-
-
-
-}

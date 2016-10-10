@@ -1,4 +1,5 @@
-﻿  stdafx.cpp
-  Multi-threaded Image Processing.cpp
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(201): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+﻿  Multi-threaded Image Processing.cpp
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(109): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(110): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(177): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
   Multi-threaded Image Processing.vcxproj -> C:\Users\user\Desktop\677\Multi-threaded Image Processing\Debug\Multi-threaded Image Processing.exe
