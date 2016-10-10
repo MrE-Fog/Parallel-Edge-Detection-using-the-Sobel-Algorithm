@@ -15,6 +15,8 @@
 #include <cmath>
 #include <ctime>
 #include <omp.h>
+#include<stdio.h>
+
 
 using namespace std;
 
@@ -40,6 +42,13 @@ typedef struct {
 	int num_colors;
 	int num_important_colors;
 } information_type;
+
+
+//sobel algorithm declaration
+vector <vector <int>> sobel(int width, int height, vector <vector <int> >, vector <vector <int> >);
+
+//split images declaration
+vector <vector <int>> split(int height, int width, int split);
 
 int main(int argc, char* argv[])
 {
@@ -89,6 +98,9 @@ int main(int argc, char* argv[])
 	}
 	cout << imageFileName << ": " << information.width << " x " << information.height << endl;
 
+	//split image into equal parts
+
+
 
 	// this loop shows how to simply recreate the original Black-and-White image
 	for (row = 0; row < information.height; row++) {
@@ -98,65 +110,8 @@ int main(int argc, char* argv[])
 		}
 	}
 
-
-
-	// pixel info is now stored in the 2D vector called 'data'
-	// at this point you could, for example, print it to a file
-	// your code (in any language) could then perform the image transformation
-	// the transformed data would need to be re-inserted into an image-formatted file for display
-
-	int dx[3][3] = { { 1,0,-1 },{ 2,0,-2 },{ 1,0,-1 } };
-	int SUM;
-
-	for (int y = 0; y < information.height - 2; y++)
-	{
-		for (int x = 0; x < information.width - 2; x++)
-		{
-			if (y == 0 || y >= information.height - 1 || x == 0 || x >= information.width - 1)
-			{
-				newData[y][x] = data[y][x];
-				continue;
-			}
-
-			int sumX = 0;
-			int sumY = 0;
-
-			for (int i = -1; i < 2; i++)
-			{
-				for (int j = -1; j < 2; j++)
-				{
-					sumX = sumX + dx[j + 1][i + 1] * (int)data[y + j][x + i];
-					sumY = sumY + dx[j + 1][i + 1] * (int)data[y + j][x + i];
-				}
-			}
-			/*Convolution for Y*/
-
-			//for (int i = -1; i < 2; i++)
-			//{
-				//for (int j = -1; j < 2; j++)
-				//{
-					//sumY = sumY + dx[j + 1][i + 1] * (int)data[y + j][x + i];
-				//}
-			//}
-			/*Edge strength*/
-			SUM = sqrt(pow((double)sumX, 2) + pow((double)sumY, 2));
-
-			if (SUM > 255) SUM = 255;
-			if (SUM < 0) SUM = 0;
-
-
-			newData[y][x] = SUM;
-			//SUM = sumX + sumY;
-		}
-
-			//unsigned char newPixel = (255 - (unsigned char)(SUM));
-			
-	}
-
-
-	// if you wish to use this C++ skeleton program for image wrangling,
-	// insert your transformation code here...
-
+	//call sobel function and store matrix data into variable newData
+	newData = sobel(information.width, information.height, newData, data);
 
 	// write header to new image file
 	newImageFile.write((char *)&header, sizeof(header_type));
@@ -182,4 +137,63 @@ int main(int argc, char* argv[])
 	newImageFile.close();
 
 	return 0;
+}
+
+vector <vector <int> > sobel(int width, int height, vector <vector <int> > newImageData, vector <vector <int> > oldData) {
+	int dx[3][3] = { { 1,0,-1 },{ 2,0,-2 },{ 1,0,-1 } };
+	int SUM;
+
+	for (int y = 0; y < height - 2; y++)
+	{
+		for (int x = 0; x < width - 2; x++)
+		{
+			if (y == 0 || y >= height - 1 || x == 0 || x >= width - 1)
+			{
+				newImageData[y][x] = oldData[y][x];
+				continue;
+			}
+
+			int sumX = 0;
+			int sumY = 0;
+
+			for (int i = -1; i < 2; i++)
+			{
+				for (int j = -1; j < 2; j++)
+				{
+					sumX = sumX + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
+					sumY = sumY + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
+				}
+			}
+
+			/*Edge strength*/
+			SUM = sqrt(pow((double)sumX, 2) + pow((double)sumY, 2));
+
+			//threshold
+			if (SUM > 255) SUM = 255;
+			if (SUM < 20) SUM = 0;
+
+			newImageData[y][x] = SUM;
+		}
+
+	}
+
+	return newImageData;
+
+}
+
+vector <vector <int>> split(int height, int width, int split) {
+
+	vector <vector <int >> chunks;
+	int modulous_y = height % split;
+	int modulous_x = width % split;
+	
+	int width = width / 4;
+	int height = height / 4;
+
+	
+
+
+
+
+
 }
