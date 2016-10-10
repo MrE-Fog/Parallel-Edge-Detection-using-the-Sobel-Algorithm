@@ -160,21 +160,16 @@ vector <vector <int> > sobel(int width, int height, vector <vector <int> > newIm
 					sumY = sumY + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
 				}
 			}
-
 			/*Edge strength*/
 			SUM = sqrt(pow((double)sumX, 2) + pow((double)sumY, 2));
-
 			//threshold
 			if (SUM > 255) SUM = 255;
 			if (SUM < 20) SUM = 0;
 
 			newImageData[y][x] = SUM;
 		}
-
 	}
-
 	return newImageData;
-
 }
 
 vector <vector <int>> split(int height, int width, int split) {
