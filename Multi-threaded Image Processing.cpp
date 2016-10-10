@@ -47,6 +47,8 @@ typedef struct {
 
 //sobel algorithm declaration
 vector <vector <int>> sobel(int width, int height, vector <vector <int> >, vector <vector <int> >);
+vector <vector <int> > sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData);
+
 
 
 int main(int argc, char* argv[])
