@@ -140,15 +140,13 @@ int main(int argc, char* argv[])
 }
 
 vector <vector <int> > sobel(int width, int height, vector <vector <int> > newImageData, vector <vector <int> > oldData) {
+	//filter
 	int dx[3][3] = { { 1,0,-1 },{ 2,0,-2 },{ 1,0,-1 } };
 	int SUM;
 
-	for (int y = 0; y < height - 2; y++)
-	{
-		for (int x = 0; x < width - 2; x++)
-		{
-			if (y == 0 || y >= height - 1 || x == 0 || x >= width - 1)
-			{
+	for (int y = 0; y < height - 2; y++) {
+		for (int x = 0; x < width - 2; x++) {
+			if (y == 0 || y >= height - 1 || x == 0 || x >= width - 1) {
 				newImageData[y][x] = oldData[y][x];
 				continue;
 			}
@@ -156,10 +154,8 @@ vector <vector <int> > sobel(int width, int height, vector <vector <int> > newIm
 			int sumX = 0;
 			int sumY = 0;
 
-			for (int i = -1; i < 2; i++)
-			{
-				for (int j = -1; j < 2; j++)
-				{
+			for (int i = -1; i < 2; i++) {
+				for (int j = -1; j < 2; j++) {
 					sumX = sumX + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
 					sumY = sumY + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
 				}
