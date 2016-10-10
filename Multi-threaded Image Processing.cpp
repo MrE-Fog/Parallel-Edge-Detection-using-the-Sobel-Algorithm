@@ -109,19 +109,29 @@ int main(int argc, char* argv[])
 	int rows = double(total_rows % 4);
 	int rows_per_thread = floor(total_rows / 4);
 	//Calculate start and stop rows for threads
-	int row_t1_max = rows_per_thread;
-	int row_t2_max = rows_per_thread * 2;
+	int row_t1 = rows_per_thread;
+	int row_t2 = rows_per_thread * 2;
 	int row_t3 = rows_per_thread * 3;
 	int row_t4 = rows_per_thread * 4 + rows;
 
 
-	//create thread
+	/*create thread
 	thread t1(sobel, information.width, information.height, newData, data);
 	thread t2(sobel, information.width, information.height, newData, data);
 	thread t3(sobel, information.width, information.height, newData, data);
 	thread t4(sobel, information.width, information.height, newData, data);
+	*/
 
-	//t1.join;
+	thread thread_1(sobel_thread, information.width, 0, row_t1- 1, newData, data);
+	thread thread_2(sobel_thread, information.width, row_t1, row_t2 - 1, newData, data);
+	thread thread_3(sobel_thread, information.width, row_t2, row_t3 - 1, newData, data);
+	thread thread_4(sobel_thread, information.width, row_t3, row_t4, newData, data);
+
+
+	thread_1.join;
+	thread_2.join;
+	thread_3.join;
+	thread_4.join;
 
 	//call sobel function and store matrix data into variable newData
 	//newData = sobel(information.width, information.height, newData, data);
@@ -184,4 +194,38 @@ vector <vector <int> > sobel(int width, int height, vector <vector <int> > newIm
 	}
 	return newImageData;
 }
+
+vector <vector <int> > sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData) {
+	//filter
+	int dx[3][3] = { { 1,0,-1 },{ 2,0,-2 },{ 1,0,-1 } };
+	int SUM;
+
+	for (int y = start_height; y < stop_height - 2; y++) {
+		for (int x = 0; x < width - 2; x++) {
+			if (y == 0 || y >= stop_height - 1 || x == 0 || x >= width - 1) {
+				newImageData[y][x] = oldData[y][x];
+				continue;
+			}
+
+			int sumX = 0;
+			int sumY = 0;
+
+			for (int i = -1; i < 2; i++) {
+				for (int j = -1; j < 2; j++) {
+					sumX = sumX + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
+					sumY = sumY + dx[j + 1][i + 1] * (int)oldData[y + j][x + i];
+				}
+			}
+			/*Edge strength*/
+			SUM = sqrt(pow((double)sumX, 2) + pow((double)sumY, 2));
+			//threshold
+			if (SUM > 255) SUM = 255;
+			if (SUM < 20) SUM = 0;
+
+			newImageData[y][x] = SUM;
+		}
+	}
+	return newImageData;
+}
+
 
