@@ -56,7 +56,7 @@ clock_t start, finish;
 //vector <vector <int>> newData;
 
 //vector<vector<int>> newDatar(416, vector<int>(2, 0));
-vector<vector<int> > newData(416, vector<int>(638));
+vector<vector<int> > newData;
 
 
 
@@ -115,6 +115,9 @@ int main(int argc, char* argv[])
 			newData[row].push_back(data[row][col]);
 		}
 	}
+
+
+
 	//divide 2d matrix for threading
 	int total_rows = information.height;
 	int rows = double(total_rows % 4);
@@ -141,10 +144,10 @@ int main(int argc, char* argv[])
 	//call sobel function and store matrix data into variable newData
 	//calls perform sobel function on different rows - currently last one run is the 
 	//only one that is written to the file
-	sobel_thread(information.width,0, row_t1 - 1, newData, data);
+	//sobel_thread(information.width,0, row_t1 - 1, newData, data);
 	sobel_thread(information.width, row_t1, row_t2 - 1, newData, data);
-	sobel_thread(information.width, row_t2, row_t3 - 1, newData, data);
-	sobel_thread(information.width, row_t3, row_t4, newData, data);
+	//sobel_thread(information.width, row_t2, row_t3 - 1, newData, data);
+	//sobel_thread(information.width, row_t3, row_t4, newData, data);
 	
 	//stop clock
 	finish = clock();
@@ -238,13 +241,15 @@ void sobel_thread(int width, int start_height, int stop_height, vector <vector <
 			newImageData[y][x] = SUM;
 		}
 	}
+	/*
 	for (int row = start_height; row < stop_height; row++) {
 		newData.push_back(vector <int>());
 		for (int col = 0; col < width; col++) {
 			newData[row].push_back(newImageData[row][col]);
 		}
 	}
-	//x = newImageData;
+	*/
+	x = newImageData;
 
 }
 
