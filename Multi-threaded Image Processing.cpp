@@ -19,6 +19,7 @@
 #include <thread>
 
 
+
 using namespace std;
 
 #pragma pack(1)
@@ -47,7 +48,9 @@ typedef struct {
 
 //sobel algorithm declaration
 vector <vector <int>> sobel(int width, int height, vector <vector <int> >, vector <vector <int> >);
-vector <vector <int> > sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData);
+void sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData);
+
+vector <vector <int>> x;
 
 
 
@@ -58,7 +61,7 @@ int main(int argc, char* argv[])
 	string imageFileName, newImageFileName;
 	unsigned char tempData[3];
 	int row, col, row_bytes, padding;
-	vector <vector <int> > data, newData;
+	vector <vector <int> > data, newData, something;
 
 	// prepare files
 	cout << "Original imagefile? ";
@@ -117,26 +120,22 @@ int main(int argc, char* argv[])
 	int row_t4 = rows_per_thread * 4 + rows;
 
 
-	/*create thread
-	thread t1(sobel, information.width, information.height, newData, data);
-	thread t2(sobel, information.width, information.height, newData, data);
-	thread t3(sobel, information.width, information.height, newData, data);
-	thread t4(sobel, information.width, information.height, newData, data);
-	*/
 
-	thread thread_1(sobel_thread, information.width, 0, row_t1- 1, newData, data);
-	thread thread_2(sobel_thread, information.width, row_t1, row_t2 - 1, newData, data);
-	thread thread_3(sobel_thread, information.width, row_t2, row_t3 - 1, newData, data);
-	thread thread_4(sobel_thread, information.width, row_t3, row_t4, newData, data);
+	//thread thread_1 (sobel_thread, information.width, 0, row_t1- 1, newData, data);
+	//thread thread_2(sobel_thread, information.width, row_t1, row_t2 - 1, newData, data);
+	//thread thread_3(sobel_thread, information.width, row_t2, row_t3 - 1, newData, data);
+//	thread thread_4(sobel_thread, information.width, row_t3, row_t4, newData, data);
 
 
-	thread_1.join;
-	thread_2.join;
-	thread_3.join;
-	thread_4.join;
+
+	//thread_1.join();
+	//thread_2.join();
+	//thread_3.join();
+	//thread_4.join();
+
 
 	//call sobel function and store matrix data into variable newData
-	//newData = sobel(information.width, information.height, newData, data);
+	sobel(information.width, information.height, newData, data);
 
 	// write header to new image file
 	newImageFile.write((char *)&header, sizeof(header_type));
@@ -145,9 +144,9 @@ int main(int argc, char* argv[])
 	// write new image data to new image file
 	for (row = 0; row < information.height; row++) {
 		for (col = 0; col < information.width; col++) {
-			tempData[0] = (unsigned char)newData[row][col];
-			tempData[1] = (unsigned char)newData[row][col];
-			tempData[2] = (unsigned char)newData[row][col];
+			tempData[0] = (unsigned char)something[row][col];
+			tempData[1] = (unsigned char)something[row][col];
+			tempData[2] = (unsigned char)something[row][col];
 			newImageFile.write((char *)tempData, 3 * sizeof(unsigned char));
 		}
 		if (padding) {
@@ -197,7 +196,7 @@ vector <vector <int> > sobel(int width, int height, vector <vector <int> > newIm
 	return newImageData;
 }
 
-vector <vector <int> > sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData) {
+void sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData) {
 	//filter
 	int dx[3][3] = { { 1,0,-1 },{ 2,0,-2 },{ 1,0,-1 } };
 	int SUM;
@@ -227,7 +226,9 @@ vector <vector <int> > sobel_thread(int width, int start_height, int stop_height
 			newImageData[y][x] = SUM;
 		}
 	}
-	return newImageData;
+	x = newImageData;
 }
+
+
 
 

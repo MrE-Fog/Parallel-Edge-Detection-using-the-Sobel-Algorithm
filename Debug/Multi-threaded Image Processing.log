@@ -1,9 +1,6 @@
 ﻿  Multi-threaded Image Processing.cpp
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(111): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(112): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(133): error C3867: 'std::thread::join': non-standard syntax; use '&' to create a pointer to member
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(134): error C3867: 'std::thread::join': non-standard syntax; use '&' to create a pointer to member
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(135): error C3867: 'std::thread::join': non-standard syntax; use '&' to create a pointer to member
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(136): error C3867: 'std::thread::join': non-standard syntax; use '&' to create a pointer to member
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(189): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(222): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(114): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(115): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(188): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\user\desktop\677\multi-threaded image processing\multi-threaded image processing\multi-threaded image processing.cpp(221): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Multi-threaded Image Processing.vcxproj -> C:\Users\user\Desktop\677\Multi-threaded Image Processing\Debug\Multi-threaded Image Processing.exe
