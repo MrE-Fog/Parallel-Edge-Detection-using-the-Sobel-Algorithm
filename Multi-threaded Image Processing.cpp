@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
 
 
 	//call sobel function and store matrix data into variable newData
-	sobel(information.width, information.height, newData, data);
+	newData = sobel(information.width, information.height, newData, data);
 
 	// write header to new image file
 	newImageFile.write((char *)&header, sizeof(header_type));
@@ -144,9 +144,9 @@ int main(int argc, char* argv[])
 	// write new image data to new image file
 	for (row = 0; row < information.height; row++) {
 		for (col = 0; col < information.width; col++) {
-			tempData[0] = (unsigned char)something[row][col];
-			tempData[1] = (unsigned char)something[row][col];
-			tempData[2] = (unsigned char)something[row][col];
+			tempData[0] = (unsigned char)newData[row][col];
+			tempData[1] = (unsigned char)newData[row][col];
+			tempData[2] = (unsigned char)newData[row][col];
 			newImageFile.write((char *)tempData, 3 * sizeof(unsigned char));
 		}
 		if (padding) {
