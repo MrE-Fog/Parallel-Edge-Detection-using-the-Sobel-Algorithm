@@ -51,6 +51,7 @@ vector <vector <int>> sobel(int width, int height, vector <vector <int> >, vecto
 void sobel_thread(int width, int start_height, int stop_height, vector <vector <int> > newImageData, vector <vector <int> > oldData);
 
 vector <vector <int>> x;
+clock_t start, finish;
 
 
 
@@ -119,20 +120,18 @@ int main(int argc, char* argv[])
 	int row_t3 = rows_per_thread * 3;
 	int row_t4 = rows_per_thread * 4 + rows;
 
-
-
 	//thread thread_1 (sobel_thread, information.width, 0, row_t1- 1, newData, data);
 	//thread thread_2(sobel_thread, information.width, row_t1, row_t2 - 1, newData, data);
 	//thread thread_3(sobel_thread, information.width, row_t2, row_t3 - 1, newData, data);
 //	thread thread_4(sobel_thread, information.width, row_t3, row_t4, newData, data);
-
-
 
 	//thread_1.join();
 	//thread_2.join();
 	//thread_3.join();
 	//thread_4.join();
 
+	//start clock for timing
+	start = clock();
 
 	//call sobel function and store matrix data into variable newData
 	//calls perform sobel function on different rows - currently last one run is the 
@@ -141,6 +140,9 @@ int main(int argc, char* argv[])
 	sobel_thread(information.width, row_t1, row_t2 - 1, newData, data);
 	sobel_thread(information.width, row_t2, row_t3 - 1, newData, data);
 	sobel_thread(information.width, row_t3, row_t4, newData, data);
+	
+	//stop clock
+	finish = clock();
 
 	// write header to new image file
 	newImageFile.write((char *)&header, sizeof(header_type));
