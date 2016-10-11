@@ -53,6 +53,11 @@ void sobel_thread(int width, int start_height, int stop_height, vector <vector <
 vector <vector <int>> x;
 clock_t start, finish;
 
+//vector <vector <int>> newData;
+
+//vector<vector<int>> newDatar(416, vector<int>(2, 0));
+vector<vector<int> > newData(416, vector<int>(638));
+
 
 
 int main(int argc, char* argv[])
@@ -233,7 +238,14 @@ void sobel_thread(int width, int start_height, int stop_height, vector <vector <
 			newImageData[y][x] = SUM;
 		}
 	}
-	x = newImageData;
+	for (int row = start_height; row < stop_height; row++) {
+		newData.push_back(vector <int>());
+		for (int col = 0; col < width; col++) {
+			newData[row].push_back(newImageData[row][col]);
+		}
+	}
+	//x = newImageData;
+
 }
 
 
