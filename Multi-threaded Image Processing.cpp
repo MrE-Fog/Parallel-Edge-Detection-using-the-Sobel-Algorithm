@@ -135,7 +135,12 @@ int main(int argc, char* argv[])
 
 
 	//call sobel function and store matrix data into variable newData
-	sobel_thread(information.width,0, row_t1, newData, data);
+	//calls perform sobel function on different rows - currently last one run is the 
+	//only one that is written to the file
+	sobel_thread(information.width,0, row_t1 - 1, newData, data);
+	sobel_thread(information.width, row_t1, row_t2 - 1, newData, data);
+	sobel_thread(information.width, row_t2, row_t3 - 1, newData, data);
+	sobel_thread(information.width, row_t3, row_t4, newData, data);
 
 	// write header to new image file
 	newImageFile.write((char *)&header, sizeof(header_type));
@@ -168,8 +173,8 @@ vector <vector <int> > sobel(int width, int height, vector <vector <int> > newIm
 	int dx[3][3] = { { 1,0,-1 },{ 2,0,-2 },{ 1,0,-1 } };
 	int SUM;
 
-	for (int y = 0; y < height - 1; y++) {
-		for (int x = 0; x < width - 1; x++) {
+	for (int y = 0; y < height - 2; y++) {
+		for (int x = 0; x < width - 2; x++) {
 			if (y == 0 || y >= height - 1 || x == 0 || x >= width - 1) {
 				newImageData[y][x] = oldData[y][x];
 				continue;
