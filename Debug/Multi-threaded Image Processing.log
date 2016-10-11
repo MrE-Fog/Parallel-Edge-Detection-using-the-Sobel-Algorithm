@@ -1,2 +1,7 @@
-﻿  Multi-threaded Image Processing.vcxproj -> C:\Users\drynties.EA\repos\image-processing-using-sobel\Debug\Multi-threaded Image Processing.exe
-  Multi-threaded Image Processing.vcxproj -> C:\Users\drynties.EA\repos\image-processing-using-sobel\Debug\Multi-threaded Image Processing.pdb (Full PDB)
+﻿  stdafx.cpp
+  Multi-threaded Image Processing.cpp
+c:\users\user\repo\677\p2\image-processing-using-sobel\multi-threaded image processing.cpp(124): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\user\repo\677\p2\image-processing-using-sobel\multi-threaded image processing.cpp(125): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\user\repo\677\p2\image-processing-using-sobel\multi-threaded image processing.cpp(214): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\user\repo\677\p2\image-processing-using-sobel\multi-threaded image processing.cpp(247): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Multi-threaded Image Processing.vcxproj -> C:\Users\user\repo\677\p2\image-processing-using-sobel\Debug\Multi-threaded Image Processing.exe
